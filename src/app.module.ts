@@ -3,6 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { StudentModule } from './student/student.module';
+import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { StudentModule } from './student/student.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+
+    UploadsModule,
   ],
   controllers: [],
   providers: [],

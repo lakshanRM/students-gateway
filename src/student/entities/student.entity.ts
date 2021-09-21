@@ -18,6 +18,10 @@ export class Student {
 
   @Column()
   @Field()
+  email: string;
+
+  @Column()
+  @Field()
   dob: string;
 
   @Column()

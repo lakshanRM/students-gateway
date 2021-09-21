@@ -13,6 +13,10 @@ export class CreateStudentInput {
 
   @Column()
   @Field()
+  email: string;
+
+  @Column()
+  @Field()
   dob: string;
 
   @Column()

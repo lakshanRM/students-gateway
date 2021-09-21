@@ -33,6 +33,7 @@ export class StudentService {
     student.lastName = updateStudentInput.lastName;
     student.dob = updateStudentInput.dob;
     student.age = updateStudentInput.age;
+    student.email = updateStudentInput.email;
     return await this.studentRepo.save(student);
   }
 

@@ -1,4 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import {
+  ClientProxy,
+  ClientProxyFactory,
+  Transport,
+} from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateStudentInput } from './dto/create-student.input';
@@ -7,50 +12,39 @@ import { Student } from './entities/student.entity';
 
 @Injectable()
 export class StudentService {
+  private client: ClientProxy;
   constructor(
     @InjectRepository(Student) private studentRepo: Repository<Student>,
-  ) {}
-
-  async create(createStudentInput: CreateStudentInput): Promise<Student> {
-    const newStudent = this.studentRepo.create(createStudentInput);
-    return this.studentRepo.save(newStudent);
-  }
-
-  async createBulk(
-    createStudentInputAry: CreateStudentInput[],
-  ): Promise<Student[]> {
-    const studnetsAry: any = [];
-    createStudentInputAry.forEach((student) => {
-      studnetsAry.push(this.studentRepo.create(student));
+  ) {
+    this.client = ClientProxyFactory.create({
+      transport: Transport.TCP,
     });
-
-    return await this.studentRepo.save(studnetsAry);
   }
 
-  async findAll(): Promise<Student[]> {
-    return this.studentRepo.find();
+  async create(createStudentInput: CreateStudentInput) {
+    return await this.client.send('create', createStudentInput);
   }
 
-  async findOne(id: number): Promise<Student> {
-    return this.studentRepo.findOneOrFail(id);
+  async createBulk(createStudentInputAry: CreateStudentInput[]) {
+    return await this.client.send('createBulk', createStudentInputAry);
   }
 
-  async update(
-    id: number,
-    updateStudentInput: UpdateStudentInput,
-  ): Promise<Student> {
-    const student = await this.studentRepo.findOne(id);
-    student.firstName = updateStudentInput.firstName;
-    student.lastName = updateStudentInput.lastName;
-    student.dob = updateStudentInput.dob;
-    student.age = updateStudentInput.age;
-    student.email = updateStudentInput.email;
-    return await this.studentRepo.save(student);
+  async findAll() {
+    return await this.client.send('find', '');
   }
 
-  async remove(id: number): Promise<Student> {
-    const student = await this.studentRepo.findOne(id);
-    await this.studentRepo.remove(student);
-    return student;
+  async findOne(id: number) {
+    return await this.client.send('findOne', id);
+  }
+
+  async update(id: number, updateStudentInput: UpdateStudentInput) {
+    return await this.client.send('update', {
+      id: id,
+      student: updateStudentInput,
+    });
+  }
+
+  async remove(id: number) {
+    return await this.client.send('delete', id);
   }
 }

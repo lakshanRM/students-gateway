@@ -18,6 +18,7 @@ type Query {
 
 type Mutation {
   createStudent(createStudentInput: CreateStudentInput!): Student!
+  createStudentBulk(createStudentInputAry: [CreateStudentInput!]!): [Student!]!
   updateStudent(updateStudentInput: UpdateStudentInput!): Student!
   removeStudent(id: Int!): Student!
 }

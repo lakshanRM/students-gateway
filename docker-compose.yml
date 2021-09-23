@@ -4,8 +4,12 @@ services:
     image: student-gql
     depends_on:
       - postgres
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/student_db
+      DATABASE_URL: postgres://postgres:postgres@postgres:35000/student_db
       NODE_ENV: development
       PORT: 3000
     ports:

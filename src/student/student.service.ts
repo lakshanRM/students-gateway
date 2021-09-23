@@ -16,6 +16,17 @@ export class StudentService {
     return this.studentRepo.save(newStudent);
   }
 
+  async createBulk(
+    createStudentInputAry: CreateStudentInput[],
+  ): Promise<Student[]> {
+    const studnetsAry: any = [];
+    createStudentInputAry.forEach((student) => {
+      studnetsAry.push(this.studentRepo.create(student));
+    });
+
+    return await this.studentRepo.save(studnetsAry);
+  }
+
   async findAll(): Promise<Student[]> {
     return this.studentRepo.find();
   }

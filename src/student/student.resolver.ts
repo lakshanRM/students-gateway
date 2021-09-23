@@ -15,6 +15,14 @@ export class StudentResolver {
     return this.studentService.create(createStudentInput);
   }
 
+  @Mutation(() => [Student])
+  createStudentBulk(
+    @Args('createStudentInputAry', { type: () => [CreateStudentInput] })
+    createStudentInputAry: CreateStudentInput[],
+  ) {
+    return this.studentService.createBulk(createStudentInputAry);
+  }
+
   @Query(() => [Student], { name: 'students' })
   findAll() {
     return this.studentService.findAll();

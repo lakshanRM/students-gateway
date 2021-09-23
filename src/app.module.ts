@@ -17,11 +17,23 @@ import { UploadsModule } from './uploads/uploads.module';
 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABSE_URL,
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'admin',
+      database: 'student',
       entities: ['dist/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
     }),
+
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   url: process.env.DATABSE_URL,
+    //   entities: ['dist/**/*.entity{.ts,.js}'],
+    //   autoLoadEntities: true,
+    //   synchronize: true,
+    // }),
 
     UploadsModule,
   ],

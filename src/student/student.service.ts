@@ -13,9 +13,7 @@ import { Student } from './entities/student.entity';
 @Injectable()
 export class StudentService {
   private client: ClientProxy;
-  constructor(
-    @InjectRepository(Student) private studentRepo: Repository<Student>,
-  ) {
+  constructor() {
     this.client = ClientProxyFactory.create({
       transport: Transport.TCP,
     });

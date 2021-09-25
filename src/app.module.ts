@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { StudentModule } from './student/student.module';
-import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
   imports: [
@@ -13,7 +12,6 @@ import { UploadsModule } from './uploads/uploads.module';
     }),
 
     ConfigModule.forRoot(),
-    UploadsModule,
   ],
   controllers: [],
   providers: [],

@@ -10,11 +10,11 @@ export class Student {
 
   @Column()
   @Field()
-  firstName: string;
+  firstname: string;
 
   @Column()
   @Field()
-  lastName: string;
+  lastname: string;
 
   @Column()
   @Field()

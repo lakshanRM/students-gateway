@@ -5,11 +5,11 @@ import { Column } from 'typeorm';
 export class CreateStudentInput {
   @Column()
   @Field()
-  firstName: string;
+  firstname: string;
 
   @Column()
   @Field()
-  lastName: string;
+  lastname: string;
 
   @Column()
   @Field()

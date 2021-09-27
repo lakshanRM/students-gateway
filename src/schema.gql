@@ -4,8 +4,8 @@
 
 type Student {
   id: Float!
-  firstName: String!
-  lastName: String!
+  firstname: String!
+  lastname: String!
   email: String!
   dob: String!
   age: Float!
@@ -24,16 +24,16 @@ type Mutation {
 }
 
 input CreateStudentInput {
-  firstName: String!
-  lastName: String!
+  firstname: String!
+  lastname: String!
   email: String!
   dob: String!
   age: Float!
 }
 
 input UpdateStudentInput {
-  firstName: String
-  lastName: String
+  firstname: String
+  lastname: String
   email: String
   dob: String
   age: Float
